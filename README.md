@@ -1,5 +1,77 @@
 # Getting Started with Create React App
 
+## useEffect hook
+
+Its is used to perform side effects in React. Side effect in react means
+anything outside the react scope. For Eg using the native webApis like
+local Storage, calling some back end api for data, directly modifying
+the components using the dom methods like document.getElementById("sport").innerHTML="i love foot ball". All of this will be done inside the useEffect
+hook . useEffect hook has two paramenter,First parameter is the actual function
+that needs to be performed and second is the dependency. Dependices are nothing 
+but the variables used by the first function
+
+
+useEffect(<function>,<dependency>)
+
+function Countter(){
+const [count,setCount]=useState(0);
+
+we can use a setTimeout function to increment the count by one.
+useEffect(()=>{
+
+    setTimeout((count)=>setCount(count+1),1000)
+}
+)
+
+return (<>
+<p>the counter value is {count}</p>
+</>)
+}
+
+here in the above use Effect we are not supplying any dependencies.hence the 
+whenever the component renderers the useEffect will execute. here when the count increases the component will re-render causing the useEffect to run again
+
+a. If we suppling an empty array as dependency then the use Effect will only run once
+
+useEffect(()=>{},[])
+
+b. We can also pass the variable as a paremeter to the useEffect function. In this case  the useEffect will run during the initial render and also when the dependecy changes.
+
+
+function squareCounter(){
+
+
+const [count,setCount]=useState(0)
+const [calculation,setCalculation] =useState(0)
+
+
+useEffect(()=>{
+
+
+setCalculation(()=>count*2)
+
+},[count])
+
+
+
+
+return (<div>
+
+<p>the count is :</p>
+<button onChange={(count)=>setCount(count+1)} >IncrementCount<button>
+
+<p> the calculalated value=: {calculation}<p>
+</div>)
+
+
+}
+
+}
+
+The above useEffect will run during initial rendering and also when the count 
+changes. ie when click on the increment Count button
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
